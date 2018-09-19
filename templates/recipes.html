@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% block content %}
+        {% for recipe in recipes %}
+        {{recipe.recipe_name}}
+        {{recipe.recipe_category}}
+        {{recipe.recipe_ingredients}}
+        {{recipe.recipe_preparation_time}}
+        {{recipe.recipe_cooking_time}}
+        {{recipe.is_favourite}}
+        {% endfor %}
+        
+        <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+  </ul>
+{% endblock %}
