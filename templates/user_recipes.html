@@ -1,0 +1,142 @@
+{% extends 'base.html'%} {% block content %}
+<div class="row">
+    <div class="col s12 white add-cocktail-box">
+        <div class="icon-block">
+            <h2 class="center brown-text art-deco-font">Add a Recipe</h2>
+            <p class="light center">Click to open a form that will let you write your recipe and add it to your favourite recipe menu.</p>
+        </div>
+        <a href="/get_add_recipe_form" class="waves-effect waves-light btn #880e4f pink darken-4">Add a Recipe</a>
+    </div>
+</div>
+<div id="sorting-bar-my-recipes" class="row #00695c teal darken-3">
+    <h4 class="art-deco-font col s12 m5">My Recipes</h4>
+    <a id="sort-by-rating-button" class="waves-effect waves-light btn white col s6 m3"><i class="fas fa-star"></i> Sort by Rating</a>
+    <a id="sort-by-date-button" class="waves-effect waves-light btn white col s6 m3"><i class="fas fa-exclamation"></i> See Newest First</a>
+</div>
+<div class="row collection-container">
+    {% for recipe in recipes %} {% if recipe.author_name == username %}
+     <!--Trying out a collection display-->
+     
+    <div class="my-recipe-colelction-item" data-rating="{{recipe.average_rating}}" data-date="{{recipe.date_added}}">
+        <ul class="collection">
+            <li class="collection-item avatar" id="top-collection-item">
+                <img src="{{recipe.recipe_image}}" alt="" class="circle">
+                <span id="my-recipe-name" class="title art-deco-font"><strong>{{recipe.recipe_name}}</strong></span>
+                <p class="date-added">{{recipe.date_added}}</p>
+                <p id="my-recipe-description">{{recipe.recipe_description}}</p>
+                <span><strong>Meal Type:</strong> {{recipe.meal_type}} |</span>
+                <span><strong>Base Ingredient:</strong> {{recipe.base_ingredient}} |</span>
+                <span><strong>Flavour Profile:</strong> {{recipe.flavour}}</span>
+                {% if recipe.average_rating != '0' %}
+                <p class="secondary-content">
+                    Average Rating: {{recipe.average_rating}}/5
+                </p>
+                {% else %}
+                <p href="#!" class="secondary-content">
+                    Average Rating: No Votes Yet
+                </p>
+                {% endif %}
+            </li>
+            <li class="collection-item" id="bottom-collection-item">
+                <div class="row">
+                    <div class="col s3 art-deco-font"><a href="/recipedetail/{{ recipe.recipe_url }}" class="secondary-content"><i class="fas fa-utensils"></i> Go to Recipe</a></div>
+                    <div class="col s3 art-deco-font"><a href="/get_edit_recipe/{{ recipe._id }}" class="secondary-content"><i class="far fa-edit"></i> Edit</a></div>
+                    <div class="col s3 art-deco-font"><a href="#!" class="secondary-content modal-trigger" data-target="modal-confirm-delete-{{ recipe._id }}"><i class="far fa-trash-alt"></i> Delete</a></div>
+                </div>
+            </li>
+        </ul>
+         <!--Modal Structure -->
+        <div id="modal-confirm-delete-{{ recipe._id }}" class="modal">
+            <div class="modal-content">
+                <h4>Please Confirm Delete</h4>
+                <p>Once you delete a recipe, it's gone.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel and Go Back</a>
+                <a href="/delete_cocktail/{{ recipe._id }}" class="modal-close waves-effect waves-green btn-flat">Confirm Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endif %} {% endfor %}
+</div>
+<div id="load-more-spice">
+    <a id="loadMore" class="btn-small center #880e4f pink darken-4">Load More <i class="fas fa-plus fa-xs"></i></a>
+</div>
+<!-- Below, the script containing the sorting options for the recipes -->
+<script>
+    $(document).ready(function() {
+        
+        var totalRecipes = $(".my-recipe-colelction-item").length
+        // Show only the first four recipes - START
+        $(function() {
+            $(".my-recipe-colelction-item").slice(0, 3).show();
+            $(".my-recipe-colelction-item").slice(4, totalRecipes).hide();
+        });
+        // Show only the first eight recipes - END
+        
+        // Counting the number of recipes shown at a given time - START
+        var visibleRecipes = 0;
+        checkVisible = function() {
+            $(".my-recipe-colelction-item").each(function() {
+                if ($(this).is(':visible') == true ) {
+                    visibleRecipes += 1;
+                }
+            });
+            console.log('visibleRecipes', visibleRecipes);
+        };
+        // Counting the number of recipes shown at a given time - END
+        
+        // Load More button - START
+        $(function() {
+            $("#loadMore").on('click', function(e) {
+                e.preventDefault();
+                $(".my-recipe-colelction-item:hidden").slice(0, 4).slideDown();
+                if ($(".my-recipe-colelction-item:hidden").length == 0) {
+                    $("#loadMore").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+                checkVisible();
+                visibleRecipes = 0;
+            });
+        });
+        // Load more button - END
+        
+         // Sorting by rating - START
+        $("#sort-by-rating-button").on("click", function() {
+            checkVisible();
+            $(".my-recipe-colelction-item").slice(0, totalRecipes).show();
+            $(".my-recipe-colelction-item").sort(sort_recipes).appendTo('.collection-container');
+            $(".my-recipe-colelction-item").slice(visibleRecipes, totalRecipes).hide();
+            function sort_recipes(a, b) {
+                return ($(b).data('rating')) < ($(a).data('rating')) ? -1 : 1;
+            }
+            visibleRecipes = 0;
+        });
+        // Sorting by rating - END
+        
+        // Sorting by date - START
+        $("#sort-by-date-button").on("click", function() {
+            checkVisible();
+            $(".my-recipe-colelction-item").slice(0, totalRecipes).show();
+            $(".my-recipe-colelction-item").sort(sort_recipes).appendTo('.collection-container');
+            $(".my-recipe-colelction-item").slice(visibleRecipes, totalRecipes).hide();
+            function sort_recipes(a, b) {
+                return ($(b).data('date')) < ($(a).data('date')) ? -1 : 1;
+            }
+            visibleRecipes = 0;
+        });
+        // Sorting by date - END
+        
+        // Formating the date_added string - START
+        dateStr = $('.date-added').text();
+        year = dateStr.slice(0,4);
+        month = dateStr.slice(5,7);
+        day = dateStr.slice(8,10);
+        console.log('day: ', day, 'month:', month, 'year:', year);
+        $('.date-added').text('Recipe added on: ' + day + '-' + month + '-' + year);
+        // Formating the date_added string - END
+    });
+</script>
+{% endblock %}

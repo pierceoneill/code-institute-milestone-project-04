@@ -1,0 +1,226 @@
+{% extends 'base.html'%} {% block content %} {% if not logged_in %}
+    <p>Please enter Your Username</p>
+    <div class="row white">
+        <form class="col s12" method="POST">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="username" name="username" type="text" class="validate" required>
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">
+                Submit
+            </button>
+        </form>
+    </div>
+{% endif %} {% if logged_in %}
+    <h3 class="art-deco-font">Hi there, {{username}}. Welcome to your Daddy Dinners Cookbook!</h3>
+    <h5>
+        You have created <span id="counter-text-my-recipes"></span> recipes!
+    </h5>
+    <br>
+        <div class="container">
+                <div id="user-has-recipes" class="row white form-padding">
+                    <div id="counter-box-my-recipes" class="art-deco-font center-align #880e4f pink darken-4 col s3 m3">
+                        <p class="art-deco-font">Recipe Count</p>
+                    </div>
+                    <h5 class="margin-left mobile-hide col m7 offset-m1">Here, you'll find some insights about your recipes and preferences</h5>
+                    <h5 class="margin-left show-on-small hide-on-med-and-up col s8">This is how you mix it</h5>
+                    <input id="reset-button" class="#00695c teal darken-3 btn col s12" type="button" value="Reset All" />
+                </div>
+                <div id="user-zero-recipes" class="row white form-padding">
+                    <h5 class="margin-left mobile-hide col s12">You have no recipes yet, click to create your first recipe!</h5>
+                    <h5 class="margin-left show-on-small hide-on-med-and-up col s12">Add your first recipe!</h5>
+                    <a href="/get_add_recipe_form" class="waves-effect waves-light btn #00695c teal darken-3 btn col s12">Add a Recipe</a>
+                </div>
+        </div>
+        <br>
+
+            <div class="row dashboard-graphs">
+                <div id='spirit-pie-chart' class="col s12 m6 xl4">
+                    <h4 class="art-deco-font">Favourite Meal Type</h4>
+                </div>
+                <div id='cocktail-type-bar-chart' class="col s12 m6 xl4">
+                    <h4 class="art-deco-font">Favourite Dishes</h4>
+                </div>
+                <div id='flavour-profile-chart' class="col s12 m12 xl4">
+                    <h4 class="art-deco-font">Favourite Flavour Profile</h4>
+                </div>
+            </div>
+            <br>
+
+        <div class="row">
+            <div id="log-in-buttons" class="col m6 offset-m3">
+                <a href="{{url_for('get_my_recipes')}}" class="margin-right-xs waves-effect waves-light btn-small pink darken-4"><i class="fas fa-cookie-bite"></i> See your Recipes</a>
+                <a href="/get_logout" class="waves-effect waves-light btn-small"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+            </div>
+        </div>
+        <p id="hidden-recipes" hidden>{{recipes|safe}}</p>
+        <!-- Below, the script containing the dashboard grapshs -->
+        <script>
+            $(document).ready(function() {
+                var username = '{{username}}';
+                
+                var recipesText = $('#hidden-recipes').text();
+                var recipesJson = JSON.parse(recipesText);
+                var recipesList = [];
+                
+                for (i in recipesJson) {
+                    recipesList.push(recipesJson[i]);
+                }
+                
+                makeDashboard(recipesList);
+                
+                // Setting up to make dashboard
+                function makeDashboard(recipesList) {
+                    
+                    
+                    // Separating only recipes created by current user
+                    myRecipesList = [];
+                    
+                    for ( var i = 0; i < recipesList.length; i++ ) {
+                        let authorName = recipesList[i]['author_name'];
+                        
+                        if ( username == authorName ) {
+                            myRecipesList.push(recipesList[i]);
+                        }
+                    }
+                    
+                    var ndx = crossfilter(myRecipesList);
+                    
+                    // Below, I call the functions used for the different 
+                    // graphs in the dashboard
+                    
+                    counterMyRecipes(ndx, '#counter-text-my-recipes');
+                    counterMyRecipes(ndx, '#counter-box-my-recipes');
+                    spiritPieChart(ndx);
+                    cocktailTypeBar(ndx);
+                    flavourProfileChart(ndx);
+                    resetButton(ndx);
+                    
+                    dc.renderAll();
+                }
+                
+                function resetButton(ndx) {
+                    $("#reset-button").on("click", function() {
+                          dc.filterAll();
+                          dc.redrawAll();
+                    });
+                  }
+                
+                function counterMyRecipes(ndx, element) {
+                    
+                    var myRecipesTotal = ndx.groupAll();
+                    
+                    dc.numberDisplay(element)
+                        .formatNumber(d3.format("d"))
+                        .valueAccessor(function (d) {
+                            d = myRecipesList.length
+                            return (+d);
+                        })
+                        .group(myRecipesTotal);
+                }
+            
+                function spiritPieChart(ndx) {
+                
+                mySpirits = []
+                for ( var i = 0; i < myRecipesList.length; i++) {
+                        let baseSpirit = myRecipesList[i]['base_spirit']
+                        mySpirits.push(baseSpirit)
+                    }
+                // console.log('mySpirits: ', mySpirits);
+                var spiritDimension = ndx.dimension(function(d) {
+                    return d['base_spirit'];
+                });
+                
+                var spiritGroup = spiritDimension.group();
+                
+                dc.pieChart("#spirit-pie-chart")
+                    .width(200)
+                    .height(200)
+                    .radius(140)
+                    .innerRadius(30)
+                    .transitionDuration(500)
+                    .minAngleForLabel(0.2)
+                    .colorAccessor(function (d) {
+                        return d.key;
+                    })
+                    .ordinalColors(["#880D40", "#890F0C", "#8B460B", "#8C7F0A", "#628E08", "#279007", "#04935F" ])
+                    .dimension(spiritDimension)
+                    .group(spiritGroup);
+                }
+                
+                function cocktailTypeBar(ndx) {
+                    myCocktailTypes = []
+                    for ( var i = 0; i < myRecipesList.length; i++) {
+                            let cocktailType = myRecipesList[i]['cocktail_type']
+                            myCocktailTypes.push(cocktailType)
+                        }
+    
+                    var cocktailTypeDimension = ndx.dimension(function(d) {
+                        return d['cocktail_type'];
+                    });
+                    
+                    var cocktailTypeGroup = cocktailTypeDimension.group();
+                    
+                    dc.barChart('#cocktail-type-bar-chart')
+                        .width(300)
+                        .height(200)
+                        .margins({top: 10, right: 50, bottom: 30, left: 50})
+                        .colorAccessor(function (d) {
+                            return d.key;
+                          })
+                        .ordinalColors(["#880D40", "#890F0C", "#8B460B", "#8C7F0A", "#628E08", "#279007", "#04935F" ])
+                        .dimension(cocktailTypeDimension)
+                        .group(cocktailTypeGroup)
+                        .transitionDuration(500)
+                        .x(d3.scale.ordinal())
+                        .xUnits(dc.units.ordinal)
+                        .elasticY(true)
+                        .xAxisLabel("Cocktail Type")
+                        .yAxisLabel("Amount of Cocktails")
+                        .yAxis().tickFormat(d3.format('d'));
+                }
+                
+                function flavourProfileChart(ndx) {
+                    myFlavourProfiles = []
+                    for ( var i = 0; i < myRecipesList.length; i++) {
+                            let flavourProfile = myRecipesList[i]['flavour_profile']
+                            myFlavourProfiles.push(flavourProfile)
+                        }
+                    // console.log('myFlavourProfiles: ', myFlavourProfiles);
+    
+                    var flavourProfileDimension = ndx.dimension(function(d) {
+                        return d['flavour_profile'];
+                    });
+                    
+                    var flavourProfileGroup = flavourProfileDimension.group();
+                    
+                    dc.rowChart("#flavour-profile-chart")
+                        .width(400)
+                        .height(200)
+                        .x(d3.scale.ordinal())
+                        .elasticX(true)
+                        .colorAccessor(function (d) {
+                            return d.key;
+                          })
+                        .ordinalColors(["#880D40", "#890F0C", "#8B460B", "#8C7F0A", "#628E08", "#279007", "#04935F" ])
+                        .dimension(flavourProfileDimension)
+                        .group(flavourProfileGroup)
+                        .render();
+                }
+            
+                // Logic if recipe count is zero - START
+                MyRecipeCount = myRecipesList.length
+                
+                if ( MyRecipeCount != 0 ) {
+                    $('#user-zero-recipes').css('display', 'none');
+                } else {
+                    $('#user-has-recipes').css('display', 'none');
+                    $('.dashboard-graphs').css('display', 'none');
+                }
+                // Logic if recipe count is zero - END
+            
+            });
+        </script>
+    {% endif %} {% endblock %}

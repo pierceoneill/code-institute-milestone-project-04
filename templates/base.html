@@ -1,189 +1,116 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    
+    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whiskey Drop | Taste a new whiskey every month</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Daddy Does Dinner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='starter-template/css/materialize.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='starter-template/css/materialize.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='starter-template/css/style.css')}}" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+     <!--Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+     <!--Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Yanone+Kaffeesatz" rel="stylesheet">
+    
+    <!--jQuery and Ajax -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js "></script>
+    
+    <!-- D3, Crossfilter and DC and dashboard -->
+    <script type="text/javascript" src="{{url_for('static', filename='assets/d3.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='assets/crossfilter.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='assets/dc.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='starter-template/js/queue.min.js')}}"></script>
+    
+    <!-- Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    
+
 </head>
-<body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid alert-container hidden-xs">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="site-wide-alert alert alert-warning">
-                        <strong>Sale Now On!</strong> We've got a sale on. Get a 12 month subscription for the price of 6! <a href="">See here for more details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="/" class="navbar-brand">
-                    Whiskey Drop
-                </a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <div class="navbar-collapse collapse" id="navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="">About</a></li>
-                    <li class="visible-xs"><a href="">Sign In</a></li>
-                </ul>
-
-                <div class="navbar-header navbar-right hidden-xs">
-                    <a href="/login" class='btn btn-default navbar-btn'>Sign Up</a>
-                    <p class="navbar-text"><i>Great whiskey delivered to your door</i></p>
-                </div>
-            </div>
+<body class="#fafafa grey lighten-5">
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="{{url_for('get_home')}}" class="brand-logo">
+                <span class="art-deco-font">Daddy Does Dinner</span> <i class="fas fa-utensils mobile-hide"></i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{{url_for('get_recipes')}}">All Recipes</a></li>
+                <li><a href="{{url_for('get_my_recipes')}}">My Recipes</a></li>
+                {% if not session.username %}
+                    <li><a href="{{url_for('get_login')}}">Login</a></li>
+                {% else %}
+                    <li><a href="{{url_for('get_login')}}">My Dashboard</a></li>
+                {% endif %}
+                <li><a href="{{url_for('get_search')}}"><i class="fas fa-search fa-xs"></i> Search</a></li>
+            </ul>
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="{{url_for('get_search')}}"><form action=""><input type="text" name="search" placeholder="Type and press enter to search"></form></a></li>
+                <li><a href="{{url_for('get_recipes')}}">All Cocktails</a></li>
+                <li><a href="{{url_for('get_my_recipes')}}">My Recipes</a></li>
+                {% if not session.username %}
+                    <li><a href="{{url_for('get_login')}}">Login</a></li>
+                {% else %}
+                    <li><a href="{{url_for('get_login')}}">My Dashboard</a></li>
+                {% endif %}
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
         </div>
     </nav>
-    <div class="container-fluid callout-container">
-        
-        <!-- Callout -->
-        <div class="row">
-            <div class="col-xs-12">
-                <section class="callout jumbotron text-center">
-                    <h1>The finest whiskeys delivered to your doorstep.</h1>
-                    <hr class='block-divider block-divider--orange'>
-                    <p class="lead">Sign up today to start receiving the world's best whiskeys every month. <s class="hidden-xs">€19.99</s> <span class="visible-xs"><br></span> <strong><mark>First one is free!</mark></strong></p>
-                    <p><button class="btn btn-lg btn--cta btn--red" data-toggle='modal' data-target='#signUpModal'>Sign Up!</button></p>
-                    <p class="text-muted"><small>You must be over 18 to sign up to our service. Please drink responsibly.</small></p>
-                </section>
-            </div>
-        </div>
-        <!-- /.callout -->
+    <div class="container my-container">
+        {% block content %} {% endblock %}
     </div>
-
-   
-        <h1>Outside!</h1>
-        {% block content %}
-        {% endblock %}
-  
-  
-   <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <div class="media">
-                            <div class="media-left">
-                                <img src="images/girl-image.png" class="img-circle media-object" height=100 width=100>
-                            </div>
-                            <div class="media-body">
-                                <blockquote class="quote">
-                                    <p>I've been introduced to more than 10 great international whiskeys I never knew about.</p>
-                                    <footer>Jane Doe on <cite title="Twitter">Twitter</cite></footer>
-                                </blockquote>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <div class="media">
-                            <div class="media-left">
-                                <img src="images/guy-image.png" class="img-circle media-object" height=100 width=100>
-                            </div>
-                            <div class="media-body">
-                                <blockquote class="quote">
-                                    <p>I haven't been sober for months!</p>
-                                    <footer>Jane Doe on <cite title="Twitter">Twitter</cite></footer>
-                                </blockquote>
-                            </div>
-                        </div>
-                    </div>
+    <footer class="page-footer #388e3c green darken-2" id="footer-custom">
+        <div class="container">
+            <div class="row no-margin">
+                <div class="col l6 m3 mobile-hide">
+                    <h5 class="white-text footer-heading">About Daddy Dinners</h5>
+                    <p class="grey-text text-lighten-4 footer-text">
+                        Easy Recipes for Stay at Home Dads<br>
+                        Do you have any suggestions?<br>
+                        <a class="orange-text text-lighten-3" href="mailto:pierceoneillky@gmail.com">pierceoneillky@gmail.com</a>
+                    </p>
                 </div>
-            </section>
-            <!-- /.quotes -->
-        </div>
-    </div>
-
-    <div class="container-wrapper container-wrapper--red">
-        <div class="container features-container content-container">
-            <!-- Features -->
-            <section class="features">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="page-header">
-                            <h2 class="text-uppercase">Features:</h2>
-                            <hr class="block-divider block-divider--short block-divider--white">
-                        </div>
-                    </div>
+                <div class="col l3 m3 mobile-hide">
+                    <h5 class="white-text footer-heading">Go to</h5>
+                    <ul>
+                        <li class="footer-text"><a class="white-text" href="{{url_for('get_recipes')}}">All Recipes</a></li>
+                        <li class="footer-text"><a class="white-text" href="{{url_for('get_my_recipes')}}">My Recipes</a></li>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6 col-lg-4">
-                        <div class="feature">
-                            <h3><span class="glyphicon glyphicon-gift hidden-xs"></span> Feature 1 <span class="label label-success">New!</span></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p><a class="btn btn-sm btn-default" href="">Read More</a></p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6 col-lg-4">
-                        <div class="feature">
-                            <h3><span class="glyphicon glyphicon-credit-card hidden-xs"></span> Feature 2</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p><a class="btn btn-sm btn-default" href="">Read More</a></p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 hidden-md col-lg-4">
-                        <div class="feature">
-                            <h3><span class="glyphicon glyphicon-remove-sign hidden-xs"></span> Feature 3</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p><a class="btn btn-sm btn-default" href="">Read More</a></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- /.features -->
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Sign Up For Whiskey Drop!</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="Email">
-                            <p class="help-block">We'll never share your email address with anyone</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="passwordRepeat">Repeat Password</label>
-                            <input type="password" class="form-control" id="passwordRepeat" placeholder="Repeat Your Password">
-                        </div>
-                        <button type="submit" class="btn btn-success">Sign Up!</button>
-                    </form>
+                <div class="col l3 m3 s12">
+                    <h5 class="white-text footer-heading">More Info</h5>
+                    <ul>
+                        <li class="footer-text"><a class="white-text" href="https://github.com/pierceoneill"><i class="fab fa-github fa-2x"></i> github.com/pierceoneill</a></li>
+                        <li class="footer-text"><a class="white-text" href="https://www.linkedin.com/in/pierce-oneill/"><i class="fab fa-linkedin fa-2x"></i> pierce-oneill</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.collapsible').collapsible();
-        });
-    </script>
+        <div class="footer-copyright footer-text #212121 grey darken-4">
+            <div class="container">
+                Pierce O'Neill 2018 made with <i class="fas fa-heart fa-lg"></i> and <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
+    
+    
+    <script type="text/javascript" src="{{url_for('static', filename='starter-template/js/init.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='starter-template/js/materialize.min.js')}}"></script>
+    
+    
+    <!-- Custom JS -->
+    <script type="text/javascript" src="{{url_for('static', filename='starter-template/js/recipe-form.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='starter-template/js/custom-js.js')}}"></script>
+    
+    {% block js %} {% endblock %}
+</body>
 
 </html>
+
+  

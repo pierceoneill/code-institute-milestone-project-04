@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2" class="">Daddy Does Dinner</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Easy, hearty and filling recipes for happy families.</h5>
+        </div>
+        <div class="row center">
+          <a href="{{url_for('get_recipes')}}" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="static/images/background1.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+      
+    <h3 class="header center teal-text text-lighten-2" class="">Recipes</h3>
+<div class="row featured-recipes">
+    {% for recipe in recipes %} {% if loop.index < 5 %}
+    <div class="featured-recipe col s12 m6" data-rating="{{recipe.average_rating}}">
+        <div class="card horizontal">
+            <div class="card-image">
+                <img src="{{recipe.recipe_image}}">
+            </div>
+            <div class="card-stacked">
+                <h5 id="card-horizontal-title" class="art-deco-font">{{recipe.recipe_name}}</h5>
+                <div class="card-content class-size">
+                    <p id="description">{{recipe.recipe_description}}</p>
+                </div>
+                <div class="card-action">
+                    <a href="/recipedetail/{{recipe.recipe_url}}">See Recipe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %} {% endfor %}
+</div>
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="static/images/background2.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>Contact Us</h4>
+          <p class="left-align light">Daddy Dishes is a collection of recipes developed by a stay at home dad for stay at home mums and dads to share receipes that our children will enjoy and eat. By joining us you will be able to seacrh though the collection of recipes, add your own to the database, edit recipes already added and favourite your most popular recipes so you can re-create dishes easily.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="static/images/background3.jpg" alt="Unsplashed background img 3"></div>
+  </div>
+{% endblock %}

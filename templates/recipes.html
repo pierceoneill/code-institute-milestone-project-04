@@ -1,27 +1,107 @@
-
-{% extends 'base.html' %}
-{% block content %}
-        {% for recipe in recipes %}
-        {{recipe.recipe_name}}
-        {{recipe.recipe_category}}
-        {{recipe.recipe_ingredients}}
-        {{recipe.recipe_preparation_time}}
-        {{recipe.recipe_cooking_time}}
-        {{recipe.is_favourite}}
-        {% endfor %}
+{% extends 'base.html'%} {% block content %}
+<div id="sorting-bar" class="row #00695c teal darken-3">
+    <h4 class="art-deco-font col s12 m5">Whats for Dinner!</h4>
+    <a id="sort-by-rating-button" class="waves-effect waves-light btn white col s6 m3"><i class="fas fa-star"></i> Sort by Rating</a>
+    <a id="sort-by-date-button" class="waves-effect waves-light btn white col s6 m3"><i class="fas fa-exclamation"></i> See Newest First</a>
+</div>
+<div id="recipe-cards" class="row">
+    {% for recipe in recipes %}
+        <div class="col s12 m4 l3 recipe-card" data-rating="{{recipe.average_rating}}" data-date="{{recipe.date_added}}">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{recipe.recipe_image}}">
+                    <div class="card-title card-title-spice">
+                        <span id="recipe_name" name="recipe_name" class="card-title art-deco-font">{{recipe.recipe_name}}</span>
+                    </div>
+                </div>
+                <div class="card-content class-size">
+                    <p id="description">{{recipe.recipe_description}}</p>
+                </div>
+              
+                <div class="card-action">
+                    <a href="/recipedetail/{{ recipe.recipe_url }}">See Recipe</a>
+                </div>
+            </div>
+            <!-- more display -->
+        </div>
+    {% endfor %} 
+    </div>
+    <div id="load-more-spice">
+        <a id="loadMore" class="btn-small center #880e4f pink darken-4">Load More <i class="fas fa-plus fa-xs"></i></a>
+    </div>
+<!-- Below, the script containing the sorting options for the recipes -->
+<script>
+    $(document).ready(function() {
         
-        <ul class="collapsible" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-  </ul>
+        var totalRecipes = $(".recipe-card").length
+
+        // Show only the first eight recipes - START
+        $(function() {
+            $(".recipe-card").slice(0, 7).show();
+            $(".recipe-card").slice(8, totalRecipes).hide();
+        });
+        // Show only the first eight recipes - END
+        
+        // Counting the number of recipes shown at a given time - START
+        var visibleRecipes = 0
+        checkVisible = function() {
+            $(".recipe-card").each(function() {
+                if ($(this).is(':visible') == true ) {
+                    visibleRecipes += 1;
+                }
+            });
+            console.log('visibleRecipes', visibleRecipes);
+        };
+        // Counting the number of recipes shown at a given time - END
+
+        
+        // Load More button - START
+        $(function() {
+            
+            $("#loadMore").on('click', function(e) {
+                e.preventDefault();
+                $(".recipe-card:hidden").slice(0, 4).slideDown();
+                if ($(".recipe-card:hidden").length == 0) {
+                    $("#loadMore").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+                checkVisible();
+                visibleRecipes = 0;
+            });
+        });
+        
+        // Load more button - END
+        
+        
+        // Sorting by rating - START
+        $("#sort-by-rating-button").on("click", function() {
+            
+            checkVisible();
+            $(".recipe-card").slice(0, totalRecipes).show();
+            $(".recipe-card").sort(sort_recipes).appendTo('#recipe-cards');
+            $(".recipe-card").slice(visibleRecipes, totalRecipes).hide();
+            function sort_recipes(a, b) {
+                return ($(b).data('rating')) < ($(a).data('rating')) ? -1 : 1;
+            }
+            visibleRecipes = 0;
+        });
+        // Sorting by rating - END
+        
+        // Sorting by date - START
+        $("#sort-by-date-button").on("click", function() {
+            checkVisible();
+            $(".recipe-card").slice(0, totalRecipes).show();
+            $(".recipe-card").sort(sort_recipes).appendTo('#recipe-cards');
+            $(".recipe-card").slice(visibleRecipes, totalRecipes).hide();
+            function sort_recipes(a, b) {
+                return ($(b).data('date')) < ($(a).data('date')) ? -1 : 1;
+            }
+            visibleRecipes = 0;
+        });
+        // Sorting by date - END
+        
+    });
+</script>
 {% endblock %}
