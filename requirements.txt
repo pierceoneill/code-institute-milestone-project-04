@@ -1,7 +1,6 @@
-BzrTools==2.6.0
+
 SecretStorage==2.0.0
 argparse==1.2.1
-bzr==2.7.0dev1
 chardet==2.0.1
 colorama==0.2.5
 configobj==4.7.2
