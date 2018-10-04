@@ -11,7 +11,7 @@ itsdangerous==0.24
 pycurl==7.19.3
 pygobject==3.30.1
 pymongo==3.7.1
-python-apt==0.9.3.5ubuntu2
+python-apt==0.9.3.5ubuntu3
 requests==2.2.1
 six==1.5.2
 unattended-upgrades==0.1
