@@ -130,7 +130,7 @@
                     }
                 // console.log('mySpirits: ', mySpirits);
                 var spiritDimension = ndx.dimension(function(d) {
-                    return d['base_spirit'];
+                    return d['meal_type'];
                 });
                 
                 var spiritGroup = spiritDimension.group();
@@ -145,7 +145,7 @@
                     .colorAccessor(function (d) {
                         return d.key;
                     })
-                    .ordinalColors(["#880D40", "#890F0C", "#8B460B", "#8C7F0A", "#628E08", "#279007", "#04935F" ])
+                    .ordinalColors(["#EAC435", "#345995", "#E40066", "#03CEA4", "#FB4D3D", "#279007", "#04935F" ])
                     .dimension(spiritDimension)
                     .group(spiritGroup);
                 }
@@ -158,7 +158,7 @@
                         }
     
                     var cocktailTypeDimension = ndx.dimension(function(d) {
-                        return d['cocktail_type'];
+                        return d['meal_type'];
                     });
                     
                     var cocktailTypeGroup = cocktailTypeDimension.group();
@@ -170,7 +170,7 @@
                         .colorAccessor(function (d) {
                             return d.key;
                           })
-                        .ordinalColors(["#880D40", "#890F0C", "#8B460B", "#8C7F0A", "#628E08", "#279007", "#04935F" ])
+                        .ordinalColors(["#EAC435", "#345995", "#E40066", "#03CEA4", "#FB4D3D", "#279007", "#04935F" ])
                         .dimension(cocktailTypeDimension)
                         .group(cocktailTypeGroup)
                         .transitionDuration(500)
@@ -185,13 +185,13 @@
                 function flavourProfileChart(ndx) {
                     myFlavourProfiles = []
                     for ( var i = 0; i < myRecipesList.length; i++) {
-                            let flavourProfile = myRecipesList[i]['flavour_profile']
+                            let flavourProfile = myRecipesList[i]['flavour']
                             myFlavourProfiles.push(flavourProfile)
                         }
                     // console.log('myFlavourProfiles: ', myFlavourProfiles);
     
                     var flavourProfileDimension = ndx.dimension(function(d) {
-                        return d['flavour_profile'];
+                        return d['flavour'];
                     });
                     
                     var flavourProfileGroup = flavourProfileDimension.group();
@@ -204,7 +204,7 @@
                         .colorAccessor(function (d) {
                             return d.key;
                           })
-                        .ordinalColors(["#880D40", "#890F0C", "#8B460B", "#8C7F0A", "#628E08", "#279007", "#04935F" ])
+                        .ordinalColors(["#EAC435", "#345995", "#E40066", "#03CEA4", "#FB4D3D", "#279007", "#04935F" ])
                         .dimension(flavourProfileDimension)
                         .group(flavourProfileGroup)
                         .render();

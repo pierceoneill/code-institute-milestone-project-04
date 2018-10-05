@@ -20,7 +20,7 @@
     <div class="my-recipe-colelction-item" data-rating="{{recipe.average_rating}}" data-date="{{recipe.date_added}}">
         <ul class="collection">
             <li class="collection-item avatar" id="top-collection-item">
-                <img src="{{recipe.recipe_image}}" alt="" class="circle">
+                <img src="{{recipe.recipe_image_url}}" alt="" class="circle">
                 <span id="my-recipe-name" class="title art-deco-font"><strong>{{recipe.recipe_name}}</strong></span>
                 <p class="date-added">{{recipe.date_added}}</p>
                 <p id="my-recipe-description">{{recipe.recipe_description}}</p>
@@ -39,8 +39,8 @@
             </li>
             <li class="collection-item" id="bottom-collection-item">
                 <div class="row">
-                    <div class="col s3 art-deco-font"><a href="/recipedetail/{{ recipe.recipe_url }}" class="secondary-content"><i class="fas fa-utensils"></i> Go to Recipe</a></div>
-                    <div class="col s3 art-deco-font"><a href="/get_edit_recipe/{{ recipe._id }}" class="secondary-content"><i class="far fa-edit"></i> Edit</a></div>
+                    <div class="col s3 art-deco-font"><a href="/recipedetail/{{ recipe._id }}" class="secondary-content"><i class="fas fa-utensils"></i> Go to Recipe</a></div>
+                    <div class="col s3 art-deco-font"><a href="/edit_recipe/{{ recipe._id }}" class="secondary-content"><i class="far fa-edit"></i> Edit</a></div>
                     <div class="col s3 art-deco-font"><a href="#!" class="secondary-content modal-trigger" data-target="modal-confirm-delete-{{ recipe._id }}"><i class="far fa-trash-alt"></i> Delete</a></div>
                 </div>
             </li>

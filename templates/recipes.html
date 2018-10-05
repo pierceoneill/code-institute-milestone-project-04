@@ -9,7 +9,7 @@
         <div class="col s12 m4 l3 recipe-card" data-rating="{{recipe.average_rating}}" data-date="{{recipe.date_added}}">
             <div class="card">
                 <div class="card-image">
-                    <img src="{{recipe.recipe_image}}">
+                    <img src="{{recipe.recipe_image_url}}" width="400" height="200">
                     <div class="card-title card-title-spice">
                         <span id="recipe_name" name="recipe_name" class="card-title art-deco-font">{{recipe.recipe_name}}</span>
                     </div>
@@ -19,7 +19,7 @@
                 </div>
               
                 <div class="card-action">
-                    <a href="/recipedetail/{{ recipe.recipe_url }}">See Recipe</a>
+                    <a href="/recipedetail/{{ recipe._id }}">See Recipe</a>
                 </div>
             </div>
             <!-- more display -->

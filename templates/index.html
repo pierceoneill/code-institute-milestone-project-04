@@ -26,7 +26,7 @@
     <div class="featured-recipe col s12 m6" data-rating="{{recipe.average_rating}}">
         <div class="card horizontal">
             <div class="card-image">
-                <img src="{{recipe.recipe_image}}">
+                <img src="{{recipe.recipe_image_url}}" width="400" height="200">
             </div>
             <div class="card-stacked">
                 <h5 id="card-horizontal-title" class="art-deco-font">{{recipe.recipe_name}}</h5>
@@ -34,7 +34,7 @@
                     <p id="description">{{recipe.recipe_description}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="/recipedetail/{{recipe.recipe_url}}">See Recipe</a>
+                    <a href="/recipedetail/{{recipe._id}}">See Recipe</a>
                 </div>
             </div>
         </div>

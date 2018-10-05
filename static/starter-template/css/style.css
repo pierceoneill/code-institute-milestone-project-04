@@ -6,8 +6,7 @@
  * Made By MaterializeCSS.com
  */
 
-/* PENDING - Make sure the recipe_descriptions texts are truncated so they
-don't overflow their boxes*/
+
 
 
 /* GENERAL */
@@ -43,25 +42,7 @@ don't overflow their boxes*/
 
 
 /* SECTIONS */
-/* HOMEPAGE */
-.fix-image-size {
-    background-size: cover;
-    width: 62em;
-    height: 32em;
-}
-#carousel-image-1 {
-    background-image: url('/static/images/header-image.jpg');
-}
-#carousel-image-2 {
-    background-image: url('/static/images/cocktail-margarita-glass.jpg')
-}
-#carousel-image-3 {
-    background-image: url('/static/images/mojito.jpg')
-}
 
-#card-horizontal-title {
-    margin-left: 1em;
-}
 
 
 /* FORMS */
@@ -73,6 +54,9 @@ don't overflow their boxes*/
     padding: 1em;
 }
 
+#card-horizontal-title {
+    margin-left: 1em;
+}
 
 /* ALL COCKTAILS */
 

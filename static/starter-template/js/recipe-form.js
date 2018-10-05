@@ -157,15 +157,15 @@ $(document).ready(function(){
         // Getting the key values -END
         // console.log('steps: ', steps);
         
-        // Getting the base spirit selector
+        // Getting the meal type selector
         var meal_type = $('#meal_type').val();
-        // console.log("Meal type is: ", recipeCategorySelector);
-        // Getting the cocktail type
+        // console.log("Meal type is: ", mealTypeSelector);
+        // Getting the base ingredient
         var base_ingredient = $('#base_ingredient').val();
-        // console.log("Base type is: ", recipeSubcategorySelector);
-        // Getting the flavour profile
-        var flavour_profile = $('#flavour').val();
-        // console.log("flavour profile is: ", flavourProfileSelector);
+        // console.log("Base Ingredient is: ", baseIngredientSelector);
+        // Getting the flavour
+        var flavour = $('#flavour').val();
+        // console.log("flavour is: ", flavourSelector);
         // Getting the author name
         var author_name = $('#author_name').val();
         // console.log("author_name: ", author_name);
@@ -181,20 +181,16 @@ $(document).ready(function(){
         
         var formData = ['form data includes: ',recipe_name, recipe_url, 
                         recipe_description, recipe_image, is_vegan, 
-                        ingredients, steps, meal_type, base_ingredient, 
-                        flavour, author_name, recipe_rating, number_of_votes,
-                        date_added, number_of_views, average_rating];
+                        ingredients, steps];
         console.log(formData);
         
         // This will take care of the POST for the add cocktail form
         $.ajax({
             url: formUrl,
             // data: {'data': steps},
-            data: JSON.stringify({recipe_name, recipe_url, recipe_description,
-                                recipe_image, is_vegan, ingredients, steps,
-                                meal_type, base_ingredient, flavour,
-                                author_name, recipe_rating, number_of_votes,
-                                date_added, number_of_views, average_rating}, 
+            data: JSON.stringify({recipe_name, recipe_url, 
+                        recipe_description, recipe_image, is_vegan, 
+                        ingredients, steps}, 
         null, '\t'),
             type: 'POST',
             contentType: 'application/json;charset=UTF-8',
@@ -209,4 +205,3 @@ $(document).ready(function(){
         });
     });
 });
-

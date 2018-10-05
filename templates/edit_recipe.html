@@ -18,7 +18,7 @@
             <div class="input-field col s12">
                 <select class="form-select" id="flavour" name="flavour" required>
                     <option value="" disabled selected>Choose Flavour (*)</option>
-                    {% for recipe in recipe %}
+                    {% for flavour in flavour %}
                     <option value="{{flavour.flavour}}">{{flavour.flavour}}</option>
                     {% endfor %}
                 </select>

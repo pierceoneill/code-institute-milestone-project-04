@@ -8,6 +8,7 @@ import json
 from datetime import datetime
 from functools import update_wrapper
 
+
 # MONGO_DBNAME = os.environ.get('MONGODB_NAME')
 # MONGODB_URI = os.environ.get('MONGODB_URI')
 
@@ -15,22 +16,11 @@ from functools import update_wrapper
 app = Flask(__name__)
 app.config['TESTING'] = True
 app.testing = True
-app.secret_key = "recipe_secret"
+app.secret_key = "daddy_day"
 
-app.config["MONGO_DBNAME"] = 'cook_book'
 app.config["MONGO_URI"] = 'mongodb://admin:admin01@ds161102.mlab.com:61102/cook_book'
 
 mongo = PyMongo(app)
-
-# # Jinja Custom Filter Datetime Object - START
-# @app.template_filter('strftime')
-# def _jinja2_filter_datetime(date, fmt=None):
-#     date = dateutil.parser.parse(date)
-#     native = date.replace(tzinfo=None)
-#     format='%b %d, %Y'
-#     return native.strftime(format)
-# ## Jinja Custom Filter Datetime Object - END
-
 
 
 @app.route('/')
@@ -48,29 +38,12 @@ def get_recipes():
                            recipes=mongo.db.recipes.find())
 
 
-@app.route('/recipedetail/<recipe_url>', methods=['GET', 'POST'])
-def recipedetail(recipe_url):
-    """
-    This function takes you to the recipe page of a specific cocktail
-    you've selected
-    """
- 
-    recipe = {}
-    recipe = mongo.db.recipes.find()
-    
-    
-    print(recipe)
-    print('*************************')
 
-    for recipe in recipe:
-        if recipe['recipe_url'] == recipe_url:
-            recipes = recipe
-         
-           
-        
+@app.route("/recipedetail/<recipe_id>")
+def recipedetail(recipe_id):
+    the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     return render_template('recipedetail.html',
-                           recipe=recipe)
-
+    recipe=the_recipe)                      
                            
 @app.route('/update_recipe_rating/<recipe_id>', methods=['POST'])
 def update_recipe_rating(recipe_id):
@@ -78,7 +51,7 @@ def update_recipe_rating(recipe_id):
     This function takes the new recipe_rating after clicking on the stars and
     updates the recipe_rating field in the open document
     """
-    recipes = mongo.db.recipes
+    recipe = mongo.db.recipes
     
     this_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     
@@ -200,39 +173,24 @@ def delete_cocktail(recipe_id):
     return redirect(url_for('get_my_recipes'))
 
 
-@app.route('/get_edit_recipe/<recipe_id>')
-def get_edit_edit_recipe(recipe_id):
-    """
-    This function reopens the form and lets you rewrite on a recipe
-    """
-    this_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    is_vegan = this_recipe['is_vegan']
+@app.route('/edit_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    '''Routing to edit recipe when user selects the update recipe button.'''
+    the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    is_vegan = the_recipe['is_vegan']
+    all_base_ingredient = mongo.db.base_ingredient.find()
     all_meal_type = mongo.db.meal_type.find()
-    all_base_ingredient= mongo.db.base_ingredient.find()
     all_flavour = mongo.db.flavour.find()
     
-    return render_template('edit_recipe.html',
-                           is_vegan=is_vegan,
-                           meal_type=all_meal_type,
-                           base_ingredient=all_base_ingredient,
-                           flavour=all_flavour,
-                           recipe=this_recipe)
+    return render_template('edit_recipe.html', 
+                         is_vegan=is_vegan,
+                        flavour=mongo.db.flavour.find(),
+                           meal_type=mongo.db.meal_type.find(),
+                           base_ingredient=mongo.db.base_ingredient.find())
 
 
 @app.route('/update_edited_recipe/<recipe_id>', methods=['POST'])
 def update_edited_recipe(recipe_id):
-    """
-    This recipe will rewrite the contents of a document according to the changes
-    added when editing a cocktail
-    """
-    recipes = mongo.db.recipes
-    
-    recipes.update({'_id': ObjectId(recipe_id)}, request.json)
-    
-    return ('', 204)
-
-@app.route('/update_edited_cocktail/<recipe_id>', methods=['POST'])
-def update_edited_cocktail(recipe_id):
     """
     This recipe will rewrite the contents of a document according to the changes
     added when editing a cocktail
