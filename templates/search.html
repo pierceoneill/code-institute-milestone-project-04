@@ -80,7 +80,7 @@
             typeDimension = ndx.dimension(function(d) { return d.meal_type; }),
             flavourDimension = ndx.dimension(function(d) { return d.base_ingredient; }),
             veganDimension = ndx.dimension(function(d) { return d.is_vegan; }),
-            nameDimension = ndx.dimension(function(d) { return d.recipe_name; });
+            nameDimension = ndx.dimension(function(d) { return d._id; });
         select1
             .dimension(spiritDimension)
             .group(spiritDimension.group())
@@ -104,7 +104,7 @@
         datatable
             .dimension(nameDimension)
             .group(function(d) { 
-                return ['<a href="' + 'recipedetail/' + d.recipe_url + '">' + '<strong>' + d.recipe_name + '</strong>' + '</a>' + ': ' + d.recipe_description]; 
+                return ['<a href="' + 'recipedetail/' + d._id + '">' + '<strong>' + d.recipe_name + '</strong>' + '</a>' + ': ' + d.recipe_description]; 
             })
             // .columns([' Cocktails Found'])
             .size(recipesList.length);
