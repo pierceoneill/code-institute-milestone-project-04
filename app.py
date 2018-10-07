@@ -8,7 +8,6 @@ import json
 from datetime import datetime
 from functools import update_wrapper
 
-
 # MONGO_DBNAME = os.environ.get('MONGODB_NAME')
 # MONGODB_URI = os.environ.get('MONGODB_URI')
 
@@ -183,10 +182,11 @@ def edit_recipe(recipe_id):
     all_flavour = mongo.db.flavour.find()
     
     return render_template('edit_recipe.html', 
-                         is_vegan=is_vegan,
-                        flavour=mongo.db.flavour.find(),
-                           meal_type=mongo.db.meal_type.find(),
-                           base_ingredient=mongo.db.base_ingredient.find())
+                        is_vegan=is_vegan,
+                        flavour=mongo.db.flavour.find,
+                        meal_type=mongo.db.meal_type.find,
+                        base_ingredient=mongo.db.base_ingredient.find,
+                        recipe=the_recipe)
 
 
 @app.route('/update_edited_recipe/<recipe_id>', methods=['POST'])
@@ -201,22 +201,12 @@ def update_edited_recipe(recipe_id):
     
     return ('', 204)
 
+@app.route('/contact')
+def contact():
+    '''Routing view to render/call contact.html in browser'''
+    return render_template("contact.html")
 
 
-@app.route('/get_search')
-def get_search():
-    recipes = mongo.db.recipes.find()
-        
-    recipes_dict = {}
-    
-    for i, recipe in enumerate(recipes):
-        recipe.pop('_id', None)
-        recipes_dict[i] = recipe
-    
-    recipes_dict = json.dumps(recipes_dict)
-
-    return render_template('search.html',
-                           recipes=recipes_dict)
 
 
 if __name__ == '__main__':

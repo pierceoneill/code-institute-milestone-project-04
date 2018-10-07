@@ -18,7 +18,7 @@
             <div class="input-field col s12">
                 <select class="form-select" id="flavour" name="flavour" required>
                     <option value="" disabled selected>Choose Flavour (*)</option>
-                    {% for flavour in flavour %}
+                    {% for flavour in recipe.flavour %}
                     <option value="{{flavour.flavour}}">{{flavour.flavour}}</option>
                     {% endfor %}
                 </select>
@@ -29,7 +29,7 @@
             <div class="input-field col s12">
                 <select class="form-select" id="meal_type" name="meal_type" required>
                     <option value="" disabled selected>Choose Meal Type (*)</option>
-                    {% for meal in meal_type %}
+                    {% for meal in recipe.meal_type %}
                     <option value="{{meal.meal_type}}">{{meal.meal_type}}</option>
                     {% endfor %}
                 </select>
@@ -40,7 +40,7 @@
             <div class="input-field col s12">
                 <select class="form-select" id="base_ingredient" name="base_ingredient" required>
                     <option value="" disabled selected>Choose Base Ingredient (*)</option>
-                    {% for base in base_ingredient %}
+                    {% for base in recipe.base_ingredient %}
                     <option value="{{base.base_ingredient}}">{{base.base_ingredient}}</option>
                     {% endfor %}
                 </select>

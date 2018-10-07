@@ -1,9 +1,13 @@
 {% extends 'base.html'%} {% block content %}
-<div id="sorting-bar" class="row #00695c teal darken-3">
-    <h4 class="art-deco-font col s12 m5">Whats for Dinner!</h4>
-    <a id="sort-by-rating-button" class="waves-effect waves-light btn white col s6 m3"><i class="fas fa-star"></i> Sort by Rating</a>
-    <a id="sort-by-date-button" class="waves-effect waves-light btn white col s6 m3"><i class="fas fa-exclamation"></i> See Newest First</a>
+<div id="sorting-bar" class="row #00695c teal lighten-3">
+    <h4 class="art-deco-font col s3 m3">Whats for Dinner!</h4>
+    <a id="sort-by-meal-type-button" class="waves-effect waves-light btn white col s4 m2"><i class="fas fa-align-justify"></i> Sort by Meal Type</a>
+    <a id="sort-by-rating-button" class="waves-effect waves-light btn white col s4 m2"><i class="far fa-grin-stars"></i> Sort by Rating</a>
+    <a id="sort-by-date-button" class="waves-effect waves-light btn white col s4 m2"><i class="far fa-thumbs-up"></i> See Newest First</a>
+    
 </div>
+
+
 <div id="recipe-cards" class="row">
     {% for recipe in recipes %}
         <div class="col s12 m4 l3 recipe-card" data-rating="{{recipe.average_rating}}" data-date="{{recipe.date_added}}">
@@ -27,7 +31,7 @@
     {% endfor %} 
     </div>
     <div id="load-more-spice">
-        <a id="loadMore" class="btn-small center #880e4f pink darken-4">Load More <i class="fas fa-plus fa-xs"></i></a>
+        <a id="loadMore" class="btn-small center #880e4f pink darken-3">Load More <i class="fas fa-plus fa-xs"></i></a>
     </div>
 <!-- Below, the script containing the sorting options for the recipes -->
 <script>
@@ -74,6 +78,20 @@
         
         // Load more button - END
         
+        
+        // Sorting by meal type - START
+        $("#sort-by-meal-type-button").on("click", function() {
+            
+            checkVisible();
+            $(".recipe-card").slice(0, totalRecipes).show();
+            $(".recipe-card").sort(sort_recipes).appendTo('#recipe-cards');
+            $(".recipe-card").slice(visibleRecipes, totalRecipes).hide();
+            function sort_recipes(a, b) {
+                return ($(b).data('meal_type')) < ($(a).data('meal_type')) ? -1 : 1;
+            }
+            visibleRecipes = 0;
+        });
+        // Sorting by meal type - END
         
         // Sorting by rating - START
         $("#sort-by-rating-button").on("click", function() {

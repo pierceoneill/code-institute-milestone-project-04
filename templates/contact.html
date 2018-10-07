@@ -1,0 +1,55 @@
+{% extends 'base.html'%} {% block content %}
+<div class="col m10 offset-m1 s12">
+            <h2 class="header center teal-text text-lighten-2">Contact Form</h2>
+   <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+         <i class="material-icons prefix grey-text text-darken-2">face</i>
+          <input id="icon_face" type="text" class="validate" required="required">
+          <label for="icon_face">Name</label>
+        </div>
+        <div class="input-field col s6">
+         <i class="material-icons prefix grey-text text-darken-2">email</i>
+          <input id="icon_email" type="email" class="validate" required="required">
+          <label for="icon_email" data-error="Write your email again please!" data-success="OK, you're good!">Email</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+         <i class="material-icons prefix grey-text text-darken-2">gesture</i>
+          <input id="icon_subject" type="text" class="validate" required="required">
+          <label for="icon_subject">Subject</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+         <i class="material-icons prefix grey-text text-darken-2">create</i>
+          <textarea id="icon_message" class="materialize-textarea" required="required"></textarea>
+          <label for="icon_message">Message</label>
+        </div>
+      </div>
+      <div class="divider"></div>
+                    <div class="row">
+                        <div class="col m12">
+                         <p class="center-align"><button class="btn btn-large waves-effect waves-light" type="button" name="action">Send Message</button></p>
+                        </div>
+                    </div>
+    </form>
+  </div>
+  <div class="row">
+      <div class=" center-align col s12">
+        <a class="waves-effect waves-light btn-large social facebook" href="https://www.facebook.com/">
+        <i class="fa fa-facebook"></i> Like Us on facebook</a>
+        <a class="waves-effect waves-light btn-large social twitter" href="https://www.twitter.com/">
+        <i class="fa fa-twitter"></i> Follow Us on twitter</a>
+        <a class="waves-effect waves-light btn-large social instagram" href="https://www.instagram.com/">
+        <i class="fa fa-instagram"></i> Follow Us on instagram</a>
+        <a class="waves-effect waves-light btn-large social pinterest" href="https://www.pinterest.com/">
+        <i class="fa fa-pinterest"></i> Follow Us pinterest</a>
+      </div>
+  </div>
+ </div>  
+</div>
+{% endblock %}

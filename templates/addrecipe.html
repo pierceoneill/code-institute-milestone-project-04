@@ -49,8 +49,8 @@
         </div>
         <div class="row white form-padding">
             <div id="image-adder" class="input-field col s12">
-                <input disabled value="Default Image" id="disabled" name="recipe_image" type="text" class="validate recipe_image">
-                <label for="disabled">Recipe Image</label>
+                <input name="recipe_image" type="text" class="validate recipe_image">
+                <label for="recipe_image_url">Recipe Image URL</label>
             </div>
         </div>
         <div class="row white form-padding">
@@ -119,7 +119,7 @@
             Go Back without Saving <i class="fas fa-arrow-circle-left fa-xs"></i>
         </a>
     <a id="submit-form-button" href="/get_my_recipes" class="#880e4f pink darken-4 btn waves-effect waves-light" name="action" data-url="{{ url_for('write_to_recipe_database') }}">
-        Submit <i class="fas fa-glass-martini-alt fa-xs"></i>
+        Submit <i class="far fa-check-circle fa-xs"></i>
     </a>
     <!--<button id="submit-form-button" class="btn waves-effect waves-light" name="action" data-url="{{ url_for('write_to_recipe_database') }}">-->
     <!--    Submit <i class="fas fa-glass-martini-alt fa-xs"></i>-->
