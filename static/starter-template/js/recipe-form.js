@@ -82,7 +82,7 @@ $(document).ready(function(){
             return;
                 }
         // Getting the recipe url
-        var recipe_url = $('#_id').val()
+        var recipe_url = $('#recipe_name').val()
         // Preparing random string to append -START
         function makeid() {
             var randomText = "";
@@ -102,7 +102,7 @@ $(document).ready(function(){
             return;
         }
         // Getting the image - PENDING REAL IMAGE 
-        var recipe_image_url= '';
+        var recipe_image = '../static/images/default-cocktail-image.png';
         // Getting the vegan boolean
         var is_vegan = $('#is_vegan').val();
         if (!is_vegan) {
@@ -179,8 +179,8 @@ $(document).ready(function(){
         // Getting the initial number of views
         var number_of_views = "0";
         
-        var formData = ['form data includes: ',recipe_name, recipe_url, 
-                        recipe_description, recipe_image_url, author_name, is_vegan, 
+        var formData = ['form data includes: ',recipe_name, recipe_url, author_name, 
+                        recipe_description, recipe_image, is_vegan, 
                         ingredients, steps];
         console.log(formData);
         
@@ -188,8 +188,8 @@ $(document).ready(function(){
         $.ajax({
             url: formUrl,
             // data: {'data': steps},
-            data: JSON.stringify({recipe_name, recipe_url, 
-                        recipe_description, recipe_image_url, author_name, is_vegan, 
+            data: JSON.stringify({recipe_name, recipe_url, author_name,
+                        recipe_description, recipe_image, is_vegan, 
                         ingredients, steps}, 
         null, '\t'),
             type: 'POST',
