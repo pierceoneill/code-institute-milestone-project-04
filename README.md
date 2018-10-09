@@ -22,19 +22,19 @@ Below are the wireframes for the project.
 
 ![Screenshot](/Wireframes/home.png)
 
-- Recipes
+#### Recipes
 
 ![Screenshot](/Wireframes/recipes.png)
 
-- Add Recipes
+#### Add Recipes
 
 ![Screenshot](/Wireframes/add_recipe.png)
 
-- Dashboard
+#### Dashboard
 
 ![Screenshot](/Wireframes/dashboard.png)
 
-- Contact Form
+#### Contact Form
 
 ![Screenshot](/Wireframes/contact_form.png)
 
