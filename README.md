@@ -65,11 +65,35 @@ The following section describes the front-end features in this project.
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
-
-- [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-
+- [Cloud 9 IDE](https://aws.amazon.com/cloud9/)
+    - This project used **Cloud 9**, an online integrated development environment, to construct the code end to end.
+- [Bootstrap](https://getbootstrap.com/)
+    - This project used **Bootstrap**, a library of website themes. The [Materialize CSS Parallax template](https://materializecss.com/templates/parallax-template/preview.html), was used for this project.
+    
+- [Flask](http://flask.pocoo.org/)
+    - This project uses **Flask**, a Python micro-framework. It is classified as a microframework because it does not require particular tools or libraries.
+- [mLab](https://mlab.com/)
+    - This project uses **mLab**, a fully managed cloud database service that hosts MongoDB databases. mLab runs on cloud providers Amazon, Google, and Microsoft Azure, and has partnered with platform-as-a-service providers. The developer used an mLab sandbox DB, which is for learning and prototyping. Json value pairs were added into the mLab document to align with the recipe wireframe. For example, 'Recipe_Title: Title', is the json value pair within the mLab database for the Recipe Title.
+- [MongoDB](https://www.mongodb.com/)
+    - This project uses **mongoDB**, a free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
+- [Jinga](http://jinja.pocoo.org/)
+    - This project uses **Jinja**, a template engine for Python, jinja code is included within the curly brackets.
+- [Python](https://www.python.org/)
+    - This project uses **Python**, an interpreted high-level programming language for general-purpose programming and used to write the logic of this game, which is included within `.py` files.
+- [HTML](https://en.wikipedia.org/wiki/HTML)
+    - This project uses **HTML**, the standard mark-up language used to build website layout, which is included within the `.html` files.
+- [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+    - This project uses **CSS**, a style sheet language, used to add styling to a website. The `custom.css` file was added to this project, to add additional styling on top of the Bootstrap template.
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+    - This project uses **JavaScript**, an object-oriented programming language used to create interactive effects within web browsers. JavaScript within this project was included with the Bootstrap template.
+- [Chrome Dev Tools](https://developers.google.com/web/tools/chrome-devtools/)
+    - This project uses **Chrome Dev Tools**, a set of web developer tools, to continuously test and inspect that the web pages are rendering as intended within the browser.
+- [GitHub](https://github.com/)
+    - This project uses **GitHub**, a web hosting service, for version control and final project backup.
+- [Heroku](https://www.heroku.com/home)
+    - This project uses **Heroku**, a web hosting service that supports Python applications, for final project deployment.
+- [Materialize CSS](https://materializecss.com)
+   - Created and designed by Google, Material Design is a design language that combines the classic principles of successful design along with innovation and technology. Google's goal is to develop a system of design that allows for a unified user experience across all their products on any platform
 
 ## Testing
 
@@ -93,24 +117,31 @@ If this section grows too long, you may want to split it off into a separate fil
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+The following section describes the process to deploy this project to Heroku.
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+1. Ensure all required technologies are installed locally, as per the `requirements.txt`file.
+2. Via Linux Terminal, login to Heroku, using 'heroku login' command. Input Heroku login details.
+2. Create new Heroku app, using 'heroku apps:create appname' command.
+3. Push project to Heroku, using 'push -u heroku master' command.
+4. Create scale, using 'heroku ps:scale web=1' command.
+5. Login to Heroku and select newly created app.
+6. Select settings. Select ‘Reveal Config'. Add IP 0.0.0.0 and PORT 5000.
+7. From 'More' menu on the top right, select 'Restart all dynos'.
+8. View app: In settings, select Domain URL, NOT Git URL to view your hosted application.
+9. Deployed via Heroku: [Daddy Does Dinner](https://cookbook-pierce.herokuapp.com/)
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+
+Please visit **DEMO** at https://cookbook-pierce.herokuapp.com/
 
 
 ## Credits
 
 ### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+- The recipes came from the [Easy Food](http://easyfood.ie/) website.
 
 ### Media
-- The photos used in this site were obtained from ...
+- The photos used in this site were obtained from [Easy Food](http://easyfood.ie/) website.
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
+- I received inspiration for this project from [Easy Food](http://easyfood.ie/) website.
