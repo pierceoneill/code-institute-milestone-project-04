@@ -60,6 +60,7 @@ The following section describes the front-end features in this project.
 8. **Social Links** - Provides users with links to the website social media pages and also shortcuts to the "All Recipes" & "My Recipes" pages.(Links NOT LIVE current social media pages for this project as this is not a real business).
 
 ### Features to Implement
+1. **Dat Added** I was unable to get this function to work reliably. It would only produce the date of creation.
 1. **Videos** - The ability to attach videos to the recipes so that the users can upload video instructions to the associated recipe.
 2. **Blog** - Add a feature to include a blog page so that the company can bring intersting news, updates and stories to users of the applications.
 
@@ -92,6 +93,8 @@ The following section describes the front-end features in this project.
     - This project uses **GitHub**, a web hosting service, for version control and final project backup.
 - [Heroku](https://www.heroku.com/home)
     - This project uses **Heroku**, a web hosting service that supports Python applications, for final project deployment.
+- [Font Awesome](https://fontawesome.com)
+    - This project uses **Font Awesome**, vector icons and social logos on the website.
 - [Materialize CSS](https://materializecss.com)
    - Created and designed by Google, Material Design is a design language that combines the classic principles of successful design along with innovation and technology. Google's goal is to develop a system of design that allows for a unified user experience across all their products on any platform
 
@@ -115,7 +118,8 @@ In this section, you need to convince the assessor that you have conducted enoug
     3. Verify that the 3 graphs for "Base Ingredient", "Meal Type" & "Flavour" are displaying correctly.
 
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+4. Date Recipe Added
+    1. The Date Added field would not fill even after mutliple attempts.
 
 ## Deployment
 
