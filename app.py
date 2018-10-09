@@ -31,12 +31,9 @@ def get_home():
 
 @app.route('/get_recipes')
 def get_recipes():
-    """
-    This function shows all the updated recipes in the database
-    """
+ 
     return render_template('recipes.html',
                            recipes=mongo.db.recipes.find())
-
 
 
 @app.route("/recipedetail/<recipe_id>")
@@ -44,14 +41,13 @@ def recipedetail(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     return render_template('recipedetail.html',
     recipe=the_recipe) 
+    
+
 
                            
 @app.route('/update_recipe_rating/<recipe_id>', methods=['POST'])
 def update_recipe_rating(recipe_id):
-    """
-    This function takes the new recipe_rating after clicking on the stars and
-    updates the recipe_rating field in the open document
-    """
+   
     recipe = mongo.db.recipes
     
     this_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
@@ -72,11 +68,7 @@ def update_recipe_rating(recipe_id):
 
 @app.route('/get_login', methods=['GET', 'POST'])
 def get_login():
-    """
-    This function shows you the login form if you're not logged in, and takes
-    you to your dashboard if you are logged in
-    """
-    
+   
     logged_in = False
     if request.method == 'GET' and not 'username' in session:
         return render_template('login.html',
@@ -135,11 +127,7 @@ def get_my_recipes():
 
 @app.route('/get_add_recipe_form')
 def get_add_recipe_form():
-    """
-    This function renders the form that we'll use to fill the fields to 
-    create a recipe, and pass to the front end the options for the
-    selectors
-    """
+    
     if request.url.startswith('http://'):
         request.url = request.url.replace('http://', 'https://', 1)
     print('url when get_add_recipe_form: ', request.url)
@@ -153,11 +141,7 @@ def get_add_recipe_form():
 
 @app.route('/write_to_recipe_database', methods=['POST'])
 def write_to_recipe_database():
-    """ 
-    This function takes the input from get_add_recipe_form and writes it into
-    our database. The it redirects to get_my_recipes, where you'll see your 
-    recipe as the most recently added
-    """
+   
     recipes = mongo.db.recipes
     
     recipes.insert_one(request.json)
@@ -165,11 +149,9 @@ def write_to_recipe_database():
     return ('', 204)
     
 
-@app.route('/delete_cocktail/<recipe_id>')
-def delete_cocktail(recipe_id):
-    """
-    This function deletes a cocktail from the database
-    """
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+   
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('get_my_recipes'))
 
@@ -193,10 +175,7 @@ def edit_recipe(recipe_id):
 
 @app.route('/update_edited_recipe/<recipe_id>', methods=['POST'])
 def update_edited_recipe(recipe_id):
-    """
-    This recipe will rewrite the contents of a document according to the changes
-    added when editing a cocktail
-    """
+    
     recipes = mongo.db.recipes
     
     recipes.update({'_id': ObjectId(recipe_id)}, request.json)

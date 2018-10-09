@@ -76,7 +76,7 @@ a {
     margin-left: 1em;
 }
 
-/* ALL COCKTAILS */
+/* ALL Recipes */
 
 .class-size {
     height: 9em;
@@ -143,14 +143,14 @@ a {
     margin-right: 0.5em;
 }
 
-/* MY RECIPES */
+/* USER RECIPES */
 
-.add-cocktail-box {
+.add-recipe-box {
     margin-top: 2em;
     padding-bottom: 2em!important;
 }
 
-.add-cocktail-box > a {
+.add-recipe-box > a {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -252,13 +252,12 @@ a {
     margin-left: 1em;
 }
 
-/*#cocktail-type-bar-chart .x-axis-label {*/
+/*#meal-type-bar-chart .x-axis-label {*/
     /*font-size: 2em!important;*/
     /*transform: translate(10em, 15em);*/
 /*    z-index: 1;*/
 /*}*/
 
-/* SEARCH */
 
 .dc-chart th {
     text-align: left
@@ -290,7 +289,7 @@ a {
     height: 100px;
 }
 
-#cocktails-found {
+#meal-found {
     margin-top: 1em;
     margin-bottom: 1em;
 }

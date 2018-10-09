@@ -53,7 +53,7 @@
             </ul>
             <ul id="nav-mobile" class="sidenav">
                 <li><a href="{{url_for('contact')}}"><form action=""><input type="text" name="search" placeholder="Type and press enter to search"></form></a></li>
-                <li><a href="{{url_for('get_recipes')}}">All Cocktails</a></li>
+                <li><a href="{{url_for('get_recipes')}}">All Recipes</a></li>
                 <li><a href="{{url_for('get_my_recipes')}}">My Recipes</a></li>
                 {% if not session.username %}
                     <li><a href="{{url_for('get_login')}}">Login</a></li>

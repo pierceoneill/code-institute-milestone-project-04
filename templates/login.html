@@ -40,7 +40,7 @@
                 <div id='ingredient-pie-chart' class="col s12 m6 xl4">
                     <h4 class="art-deco-font">Favourite Base Ingredient</h4>
                 </div>
-                <div id='cocktail-type-bar-chart' class="col s12 m6 xl4">
+                <div id='meal-type-bar-chart' class="col s12 m6 xl4">
                     <h4 class="art-deco-font">Favourite Meal Type</h4>
                 </div>
                 <div id='flavour-profile-chart' class="col s12 m12 xl4">
@@ -94,7 +94,7 @@
                     counterMyRecipes(ndx, '#counter-text-my-recipes');
                     counterMyRecipes(ndx, '#counter-box-my-recipes');
                     spiritPieChart(ndx);
-                    cocktailTypeBar(ndx);
+                    mealTypeBar(ndx);
                     flavourProfileChart(ndx);
                     resetButton(ndx);
                     
@@ -150,20 +150,20 @@
                     .group(ingredientGroup);
                 }
                 
-                function cocktailTypeBar(ndx) {
-                    myCocktailTypes = []
+                function mealTypeBar(ndx) {
+                    myMealTypes = []
                     for ( var i = 0; i < myRecipesList.length; i++) {
-                            let cocktailType = myRecipesList[i]['cocktail_type']
-                            myCocktailTypes.push(cocktailType)
+                            let mealType = myRecipesList[i]['meal_type']
+                            myMealTypes.push(mealType)
                         }
     
-                    var cocktailTypeDimension = ndx.dimension(function(d) {
+                    var mealTypeDimension = ndx.dimension(function(d) {
                         return d['meal_type'];
                     });
                     
-                    var cocktailTypeGroup = cocktailTypeDimension.group();
+                    var mealTypeGroup = mealTypeDimension.group();
                     
-                    dc.barChart('#cocktail-type-bar-chart')
+                    dc.barChart('#meal-type-bar-chart')
                         .width(450)
                         .height(275)
                         .margins({top: 10, right: 50, bottom: 30, left: 50})
@@ -171,8 +171,8 @@
                             return d.key;
                           })
                         .ordinalColors(["#EAC435", "#345995", "#E40066", "#03CEA4", "#FB4D3D", "#279007", "#04935F" ])
-                        .dimension(cocktailTypeDimension)
-                        .group(cocktailTypeGroup)
+                        .dimension(mealTypeDimension)
+                        .group(mealTypeGroup)
                         .transitionDuration(500)
                         .x(d3.scale.ordinal())
                         .xUnits(dc.units.ordinal)

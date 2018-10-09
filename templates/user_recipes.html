@@ -1,6 +1,6 @@
 {% extends 'base.html'%} {% block content %}
 <div class="row">
-    <div class="col s12 white add-cocktail-box">
+    <div class="col s12 white center add-recipe-box">
         <div class="icon-block">
             <h2 class="center brown-text art-deco-font">Add a Recipe</h2>
             <p class="light center">Click to open a form that will let you write your recipe and add it to your favourite recipe menu.</p>
@@ -53,7 +53,7 @@
             </div>
             <div class="modal-footer">
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel and Go Back</a>
-                <a href="/delete_cocktail/{{ recipe._id }}" class="modal-close waves-effect waves-green btn-flat">Confirm Delete</a>
+                <a href="/delete_recipe/{{ recipe._id }}" class="modal-close waves-effect waves-green btn-flat">Confirm Delete</a>
             </div>
         </div>
     </div>

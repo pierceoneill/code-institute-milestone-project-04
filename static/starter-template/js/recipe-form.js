@@ -118,7 +118,7 @@ $(document).ready(function(){
             $('#is_vegan').focus();
             return;
         }
-        // Getting the recipe ingredients
+             // Getting the recipe ingredients
         var ingredients = [];
         var inputTagIngredient = ($('#ingredient-adder').find('input'));
         // console.log('inputTagIngredient', inputTagIngredient);
@@ -134,12 +134,19 @@ $(document).ready(function(){
             for(var j=0; j<inputBoxes.length; j++) {
                 var inputBox = inputBoxes[j];
                 var value = $(inputBox).val();
+                var key = $(inputBox).attr('id').split('-')[0]
+                ingredient[key] = value;
                 // console.log(key, value);
             }
             ingredients.push(ingredient);
         }
-        // Getting the key values -END
-        // console.log(ingredients);
+        console.log('ingredient:', ingredient);
+        var quantity = (Object.keys(ingredient)[0]);
+        var measure_unit = (Object.keys(ingredient)[1]);
+        var ingredient_name = (Object.keys(ingredient)[2]);
+        console.log('quantity: ', quantity);
+        console.log('measure_unit: ', measure_unit);
+        console.log('ingredient_name: ', ingredient_name);
         
         // Getting the recipe steps
         var steps = [];
@@ -183,20 +190,19 @@ $(document).ready(function(){
         var number_of_votes = "0";
         // Getting the date_added
         var date_added = new Date(); 
-        // PENDING - Keep the original date of creation even after editing
         // Getting the initial number of views
         var number_of_views = "0";
         
-        var formData = ['form data includes: ',recipe_name, recipe_url, recipe_image_url, author_name, meal_type, base_ingredient, flavour,
+        var formData = ['form data includes: ',recipe_name, recipe_url, recipe_image_url, author_name, meal_type, base_ingredient, flavour, date_added,
                         recipe_description, is_vegan, 
                         ingredients, steps];
         console.log(formData);
         
-        // This will take care of the POST for the add cocktail form
+        // This will take care of the POST for the add recipe form
         $.ajax({
             url: formUrl,
             // data: {'data': steps},
-            data: JSON.stringify({recipe_name, recipe_url, recipe_image_url, author_name, meal_type, base_ingredient, flavour,
+            data: JSON.stringify({recipe_name, recipe_url, recipe_image_url, author_name, meal_type, base_ingredient, flavour, date_added,
                         recipe_description, is_vegan, 
                         ingredients, steps}, 
         null, '\t'),
