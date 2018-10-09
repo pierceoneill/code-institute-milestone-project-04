@@ -18,7 +18,7 @@ WireFrames
 
 Below are the wireframes for the project.
 
-- Home
+#### Home
 
 ![Screenshot](/Wireframes/home.png)
 
