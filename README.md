@@ -46,16 +46,22 @@ The layout used the [Materialize CSS Parallax template](https://materializecss.c
 
 In this section, you should go over the different parts of your project, and describe each in a sentence or so.
  
+
 ### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
+The following section describes the front-end features in this project.
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
+1. **Navbar** - Consists of the DADDY DOES DINNER logo which returns the user to the "Home" page of the application. There is also links to the "Recipes", "My Recipes", "Login / Dashboard" and Contact forms. The navbar will appear on all pages.
+2. **Home** - The home page consists of 4 sample recipes along with some information on contacting the webmaster and a link to the contact us page of the site.
+3. **All Recipes** - Directs the user to the "All Recipes" page which displays **ALL** recipes from **ALL** users which have been entered on the site. The user can then filter or browse through the recipes. The can view more information on each recipe by selectign the "See Recipe" link which delivers the user to the "Recipe Detail" page.
+4. **Recipe Detail** - Provides users with the recipe details containg a recipe name, description, image (if available), flavour, meal type, base ingredients, ingredients, instructions, author and date posted.
+5. **My Recipes** - Provides the user with the recipes that they have added themselves. The user's recipes can be edited and deleted by using the buttons displayed under the recipes.
+6. **Login/Dashboard** - When first selected the user will be prompted to create a username to login to the application so that they can add recipes to the database. Once logged in the user will be presented with their dashboard which provides a count of their recipes, along with 3 data charts depicting the number of base ingredients, meal types and food flavours associated with the recipes which have been added.
+7. **Contact** - Delivers the user to the contact page. This page displays a blank form, which allows users to contact the website developers to offer feedback and suggestions (not currently wired up to an email address as this is not a real business). Their are also 4 social media buttons so that the user may interact on social networks. (Links NOT LIVE current social media pages for this project as this is not a real business)
+8. **Social Links** - Provides users with links to the website social media pages and also shortcuts to the "All Recipes" & "My Recipes" pages.(Links NOT LIVE current social media pages for this project as this is not a real business).
 
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
-
-### Features Left to Implement
-- Another feature idea
+### Features to Implement
+1. **Videos** - The ability to attach videos to the recipes so that the users can upload video instructions to the associated recipe.
+2. **Blog** - Add a feature to include a blog page so that the company can bring intersting news, updates and stories to users of the applications.
 
 ## Technologies Used
 
