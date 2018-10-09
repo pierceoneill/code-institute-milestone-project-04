@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     // Activates the carousel on the homepage
     $('.carousel.carousel-slider').carousel({
@@ -81,6 +82,13 @@ $(document).ready(function(){
             $('#recipe_name').focus();
             return;
                 }
+                
+        // Getting the image 
+        var recipe_image_url = $('#recipe_image_url').val();
+        if (!recipe_image_url) {
+            $('#recipe_image_url').focus();
+            return;
+                }
         // Getting the recipe url
         var recipe_url = $('#recipe_name').val()
         // Preparing random string to append -START
@@ -101,8 +109,8 @@ $(document).ready(function(){
             $('#recipe_description').focus();
             return;
         }
-        // Getting the image - PENDING REAL IMAGE 
-        var recipe_image = '../static/images/default-cocktail-image.png';
+        
+        
         // Getting the vegan boolean
         var is_vegan = $('#is_vegan').val();
         if (!is_vegan) {
@@ -171,7 +179,7 @@ $(document).ready(function(){
         // console.log("author_name: ", author_name);
         // Getting the initial recipe_rating
         var recipe_rating = "0";
-        // Getting the initial rnumber_of_votes
+        // Getting the initial number_of_votes
         var number_of_votes = "0";
         // Getting the date_added
         var date_added = new Date(); 
@@ -179,8 +187,8 @@ $(document).ready(function(){
         // Getting the initial number of views
         var number_of_views = "0";
         
-        var formData = ['form data includes: ',recipe_name, recipe_url, author_name, 
-                        recipe_description, recipe_image, is_vegan, 
+        var formData = ['form data includes: ',recipe_name, recipe_url, recipe_image_url, author_name, meal_type, base_ingredient, flavour,
+                        recipe_description, is_vegan, 
                         ingredients, steps];
         console.log(formData);
         
@@ -188,8 +196,8 @@ $(document).ready(function(){
         $.ajax({
             url: formUrl,
             // data: {'data': steps},
-            data: JSON.stringify({recipe_name, recipe_url, author_name,
-                        recipe_description, recipe_image, is_vegan, 
+            data: JSON.stringify({recipe_name, recipe_url, recipe_image_url, author_name, meal_type, base_ingredient, flavour,
+                        recipe_description, is_vegan, 
                         ingredients, steps}, 
         null, '\t'),
             type: 'POST',

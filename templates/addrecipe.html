@@ -48,9 +48,9 @@
             </div>
         </div>
         <div class="row white form-padding">
-            <div id="image-adder" class="input-field col s12">
-                <input name="recipe_image" type="text" class="validate recipe_image">
-                <label for="recipe_image_url">Recipe Image URL</label>
+            <div class="input-field col s12">
+                <input placeholder="Please Enter Recipe Image URL eg: 'Http://www.images.com/sample.jpg" id="recipe_image_url" name="recipe_image_url" type="text" class="validate" required>
+                <label for="recipe_image_url">Recipe Image</label>
             </div>
         </div>
         <div class="row white form-padding">
@@ -125,6 +125,8 @@
     <!--    Submit <i class="fas fa-glass-martini-alt fa-xs"></i>-->
     <!--</button>-->
 </div>
+
+
 <script>
     // Go back button - START
     $('#back-button').on('click', function(e){

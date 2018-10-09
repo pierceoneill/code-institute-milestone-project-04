@@ -26,6 +26,20 @@
             </div>
         </div>
         <div class="row white form-padding">
+        <div class="input-field col s12">
+                <select class="form-select" id="flavour" name="flavour">
+                    {% for flavour in recipe.flavour %}
+                        {% if flavour == recipe['flavour'] %}
+                            <option value="{{flavour.flavour}}" selected>{{flavour.flavour}}</option>
+                        {% else %}
+                            <option value="{{flavour.flavour}}">{{flavour.flavour}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <label>Base Spirit</label>
+            </div>
+        <div class="row white form-padding">
+            
             <div class="input-field col s12">
                 <select class="form-select" id="meal_type" name="meal_type" required>
                     <option value="" disabled selected>Choose Meal Type (*)</option>
@@ -40,8 +54,8 @@
             <div class="input-field col s12">
                 <select class="form-select" id="base_ingredient" name="base_ingredient" required>
                     <option value="" disabled selected>Choose Base Ingredient (*)</option>
-                    {% for base in recipe.base_ingredient %}
-                    <option value="{{base.base_ingredient}}">{{base.base_ingredient}}</option>
+                    {% for base in base_ingredient.base_ingredient %}
+                    <option value="{{base_ingredient.base_ingredient}}">{{base_ingredient.base_ingredient}}</option>
                     {% endfor %}
                 </select>
                 <label>Base Ingredient</label>
@@ -49,7 +63,7 @@
         </div>
         <div class="row white form-padding">
             <div class="input-field col s12">
-                <input disabled value="Default Image" id="disabled" name="recipe_image" type="text" class="validate">
+                <input name="recipe_image" type="text" class="validate">
                 <label for="disabled">Recipe Image</label>
             </div>
         </div>

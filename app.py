@@ -17,6 +17,7 @@ app.config['TESTING'] = True
 app.testing = True
 app.secret_key = "daddy_day"
 
+app.config['MONGO_DBNAME'] = 'cook_book'
 app.config["MONGO_URI"] = 'mongodb://admin:admin01@ds161102.mlab.com:61102/cook_book'
 
 mongo = PyMongo(app)
@@ -42,7 +43,8 @@ def get_recipes():
 def recipedetail(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     return render_template('recipedetail.html',
-    recipe=the_recipe)                      
+    recipe=the_recipe) 
+
                            
 @app.route('/update_recipe_rating/<recipe_id>', methods=['POST'])
 def update_recipe_rating(recipe_id):
