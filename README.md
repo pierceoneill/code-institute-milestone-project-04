@@ -100,7 +100,7 @@ The following section describes the front-end features in this project.
 
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+### Manual Testing
 
 1. Add Recipe Page:
     1. Go to the "Add Recipe" page.
@@ -123,6 +123,10 @@ In this section, you need to convince the assessor that you have conducted enoug
 
 5. Edit A Recipe
     1. when editing a recipe a new recipe will create instead of modifying the existing file.
+
+## Responsive Testing 
+
+   The app was tested on Samsung S8, Apple iPhone 6, Apple iPad Air 2 and also using the Google Chrome inspect feature to test for repsonsiveness and any errors that occurred. The main issue which was found was the sidevar/ navbar not resizing.
 
 ## Deployment
 
