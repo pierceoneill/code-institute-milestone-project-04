@@ -118,8 +118,11 @@ In this section, you need to convince the assessor that you have conducted enoug
     3. Verify that the 3 graphs for "Base Ingredient", "Meal Type" & "Flavour" are displaying correctly.
 
 
-4. Date Recipe Added
-    1. The Date Added field would not fill even after mutliple attempts.
+4. Ratings
+    1. The Average Rating field does not update correctly
+
+5. Edit A Recipe
+    1. when editing a recipe a new recipe will create instead of modifying the existing file.
 
 ## Deployment
 

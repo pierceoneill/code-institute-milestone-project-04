@@ -99,7 +99,13 @@
                 <a id="add-step-btn" class="#1b5e20 green darken-4 btn-small">Add Step <i class="fas fa-plus fa-xs"></i></a>
             </div>
         </div>
-        
+        <div class="row white form-padding">
+            <div class="input-field col s12">
+                <input placeholder="Date DD, Month, YYYY. i.e. 12 January, 2018" id="date_added" name="date_added" type="text" class="validate" required>
+                <label for="date_added">Date added</label>
+            </div>
+        </div>
+   
         <div class="row white form-padding">
             <div class="input-field col s12">
                 <input disabled value="{{session['username']}}" id="author_name" name="author_name" type="text" class="validate">

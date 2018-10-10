@@ -189,7 +189,7 @@ $(document).ready(function(){
         // Getting the initial number_of_votes
         var number_of_votes = "0";
         // Getting the date_added
-        var date_added = new Date(); 
+        var date_added = $('#date_added').val(); 
         // Getting the initial number of views
         var number_of_views = "0";
         

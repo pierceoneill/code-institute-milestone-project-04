@@ -16,58 +16,32 @@
         </div>
         <div class="row white form-padding">
             <div class="input-field col s12">
-                <select class="form-select" id="flavour" name="flavour" required>
-                    <option value="" disabled selected>Choose Flavour (*)</option>
-                    {% for flavour in recipe.flavour %}
-                    <option value="{{flavour.flavour}}">{{flavour.flavour}}</option>
-                    {% endfor %}
-                </select>
-                <label>Flavour</label>
+                <input value="{{recipe.flavour}}" id="flavour" name="flavour" type="text" class="validate">
+                <label for="flavour">Flavour</label>
             </div>
         </div>
-        <div class="row white form-padding">
-        <div class="input-field col s12">
-                <select class="form-select" id="flavour" name="flavour">
-                    {% for flavour in recipe.flavour %}
-                        {% if flavour == recipe['flavour'] %}
-                            <option value="{{flavour.flavour}}" selected>{{flavour.flavour}}</option>
-                        {% else %}
-                            <option value="{{flavour.flavour}}">{{flavour.flavour}}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-                <label>Base Spirit</label>
-            </div>
-        <div class="row white form-padding">
-            
+         <div class="row white form-padding">
             <div class="input-field col s12">
-                <select class="form-select" id="meal_type" name="meal_type" required>
-                    <option value="" disabled selected>Choose Meal Type (*)</option>
-                    {% for meal in recipe.meal_type %}
-                    <option value="{{meal.meal_type}}">{{meal.meal_type}}</option>
-                    {% endfor %}
-                </select>
-                <label>Meal Type</label>
+                <input value="{{recipe.meal_type}}" id="meal_type" name="meal_type" type="text" class="validate">
+                <label for="meal_type">Meal Type</label>
+            </div>
+        </div>
+         <div class="row white form-padding">
+            <div class="input-field col s12">
+                <input value="{{recipe.base_ingredient}}" id="base_ingredient" name="base_ingredient" type="text" class="validate">
+                <label for="base_ingredient">Base Ingredient</label>
             </div>
         </div>
         <div class="row white form-padding">
             <div class="input-field col s12">
-                <select class="form-select" id="base_ingredient" name="base_ingredient" required>
-                    <option value="" disabled selected>Choose Base Ingredient (*)</option>
-                    {% for base in base_ingredient.base_ingredient %}
-                    <option value="{{base_ingredient.base_ingredient}}">{{base_ingredient.base_ingredient}}</option>
-                    {% endfor %}
-                </select>
-                <label>Base Ingredient</label>
+                <input value="{{recipe.recipe_image_url}}" id="recipe_image_url" name="recipe_image_url" type="text" class="validate">
+                <label for="recipe_image_url">Recipe Image</label>
             </div>
         </div>
+        
+        
         <div class="row white form-padding">
-            <div class="input-field col s12">
-                <input name="recipe_image" type="text" class="validate">
-                <label for="disabled">Recipe Image</label>
-            </div>
-        </div>
-        <div class="row white form-padding">
+            <label>Is the recipe Vegan?</label>
             <select class="form-select" id="is_vegan" name="is_vegan">
                 <option value="" disabled selected>Is it vegan? (*)</option>
                 {% if recipe['is_vegan'] == 'true' %}
@@ -78,7 +52,7 @@
                 <option value="false" selected >No</option>
                 {% endif %}
             </select>
-            <label>Vegan</label>
+            <label>Is the recipe Vegan?</label>
         </div>
         <div class="row white form-padding">
             <h5>Ingredients:</h5>

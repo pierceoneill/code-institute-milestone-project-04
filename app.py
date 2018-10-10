@@ -158,29 +158,28 @@ def delete_recipe(recipe_id):
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
-    '''Routing to edit recipe when user selects the update recipe button.'''
-    the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    is_vegan = the_recipe['is_vegan']
-    all_base_ingredient = mongo.db.base_ingredient.find()
-    all_meal_type = mongo.db.meal_type.find()
-    all_flavour = mongo.db.flavour.find()
-    
-    return render_template('edit_recipe.html', 
-                        is_vegan=is_vegan,
-                        flavour=mongo.db.flavour.find,
-                        meal_type=mongo.db.meal_type.find,
-                        base_ingredient=mongo.db.base_ingredient.find,
-                        recipe=the_recipe)
+    the_recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template('edit_recipe.html', recipe=the_recipe)
 
 
 @app.route('/update_edited_recipe/<recipe_id>', methods=['POST'])
 def update_edited_recipe(recipe_id):
-    
     recipes = mongo.db.recipes
     
-    recipes.update({'_id': ObjectId(recipe_id)}, request.json)
-    
-    return ('', 204)
+    recipes.insert_one(request.json),
+    {
+        'recipe_name': request.form.get['recipe_name'],
+        'recipe_description': request.form.get['recipe_description'],
+        'flavour': request.form.get['flavour'],
+        'meal_type': request.form.get['meal_type'],
+        'base_ingredient': request.form.get['base_ingredient'],
+        'recipe_image_url': request.form.get['recipe_image_url'],
+        'is_vegan': request.form.get['is_vegan'],
+        'ingredients': request.form.get['ingredients'],
+        'steps': request.form.get['steps'],
+        'author_name': request.form.get['author_name']
+    }
+    return redirect(url_for('get_my_recipes'))
 
 @app.route('/contact')
 def contact():
