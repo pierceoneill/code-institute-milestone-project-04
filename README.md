@@ -30,6 +30,10 @@ Below are the wireframes for the project.
 
 ![Screenshot](/Wireframes/add_recipe.png)
 
+#### Recipe Detail
+
+![Screenshot](/Wireframes/recipe_detail.png)
+
 #### Dashboard
 
 ![Screenshot](/Wireframes/dashboard.png)
